@@ -1,1 +1,4 @@
-casd
+getfile a.txt
+putfile b.txt
+whoami
+whoami

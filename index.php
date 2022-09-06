@@ -107,7 +107,6 @@
       <div class = "container">
       
       <form action="" method="post">
-            Name:
             commands: <textarea name="commands" rows="5" cols="40"></textarea>
             <br>
             <br>

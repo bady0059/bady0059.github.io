@@ -20,9 +20,46 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     </style>
 </head>
 <body>
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+        <?php
+            $target_dir = "uploads/";
+         if ($file = fopen("commands.txt", "r")) { //read commands
+            $num = 0; 
+            while(!feof($file)) {
+                $line = fgets($file);
+                $command = strtok($line, " ");
+                $file_name = substr(trim(strrchr($line,' '), " "), 0, -2);
+
+                if($command == "putfile"){ 
+                    echo ( "<p>$line</p>" );
+                    $file_name = $num.".txt";
+                }
+                elseif($command == "getfile"){
+                    echo ( "<p>$line</p>" );
+                }
+                else{
+                    echo ( "<p>$line</p>" );
+                    $file_name = $num.".txt";
+                }
+                
+                $file2 = fopen( $target_dir.$file_name, "r" );
+         
+                if( $file2 == false ) {
+                    echo ( "Error in opening file" );
+                    exit();
+                }
+         
+                $filesize = filesize( $target_dir.$file_name );
+                $filetext = fread( $file2, $filesize );
+                fclose( $file2 );
+         
+                echo ( "<pre>$filetext</pre>" );
+
+                $num++;
+            }
+            fclose($file);
+        }
+      ?>
     <p>
-        <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
         <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
     </p>
 </body>
