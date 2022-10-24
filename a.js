@@ -1,1 +1,1 @@
-alert('mother fuckerrrrrrrrr');
+$("#notification").html("hello mother");
